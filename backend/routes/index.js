@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const zod = require("zod");
 const {User} = require('/home/cyybxrg/Desktop/webDev Comeback/practise/week8/paytm/backend/db/db')
-const userJWTMiddleware = require("../middlewares/user")
+const authMiddleware = require("../middlewares/user")
 const jwt = require("jsonwebtoken");
 const JWT_SECRET = require("../config");
 
@@ -92,4 +92,38 @@ router.post("/login", async(req,res)=>{
     
 })
 
+// addding the optionality feature - you can whose whether you want to enter pass, first and last name or not its optional
+
+const updatePayload = zod.object({
+    password: zod.string().optional(),
+    firstName: zod.string().optional(),
+    lastName: zod.string().optional(),
+})
+
+router.put("/update", authMiddleware,async (req, res)=>{
+    const parsePayload = updatePayload.safeParse(req.body);
+
+    if(parsePayload.success){
+        const userInfo = await User.findOne({_id: req.userId})
+
+        if(userInfo){
+            await User.updateOne({_id: req.userId},
+                {
+                   $set: {
+                        password: req.body.password,
+                        firstName: req.body.firstName,
+                        lastName: req.body.lastName
+                    }
+                })
+            }
+            res.status(200).json({
+                msg: "the data updated successfully"
+            })
+    }
+    else{
+        res.status(411).json({
+            msg: "invalid input"
+        })
+    }
+})
 module.exports = router;

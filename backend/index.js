@@ -10,4 +10,4 @@ app.use(express.json());
 app.use("/api/vi/user", mainRouter);
 
 
-app.listen(3001);
+app.listen(3000);
