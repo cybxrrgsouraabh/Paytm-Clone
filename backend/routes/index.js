@@ -57,22 +57,39 @@ router.post("/signup",async(req,res)=>{
 });
 
 const signinPayload = zod.object({
-        username: zod.string().email(),
-        password: zod.string().min(8).max(30)
+    username: zod.string().email(),
+    password: zod.string().min(8).max(30)
 });
 
-router.post("/login", userJWTMiddleware, async(req,res)=>{
+router.post("/login", async(req,res)=>{
 
     const parsePayload = signinPayload.safeParse(req.body);
+
     if(parsePayload.success){
-        return res.status(200).json({
-            msg: "logged in successfully",
-            token: req.headers.authorization
+
+        const exists = await User.findOne({
+            username: req.body.username,
+            password: req.body.password
+        })
+
+        if(!exists){
+          return res.status(404).json({msg: "wrong password or username"}); 
+        }
+
+        const token = jwt.sign({userId: exists._id}, JWT_SECRET);
+        res.json({
+            msg: "user logged in successfully",
+            token: token
+        });
+      
+        
+    }
+    else{
+        res.send({
+            msg: "Error while logging in"
         })
     }
-    res.send({
-        msg: "Error while logging in"
-    })
+    
 })
 
 module.exports = router;
