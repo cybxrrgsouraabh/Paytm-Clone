@@ -35,7 +35,7 @@ const userSchema = new mongoose.Schema({
     
 });
 
-const accountSchema = mongoose.Schema({
+const accountSchema = new mongoose.Schema({
 
     balance: {
         type: String,
@@ -50,6 +50,6 @@ const accountSchema = mongoose.Schema({
 });
 
 const User = mongoose.model("User",userSchema);
-const Account = mongoose.mongo.model("Account", accountSchema);
+const Account = mongoose.model("Account", accountSchema);
 
 module.exports = { User, Account };

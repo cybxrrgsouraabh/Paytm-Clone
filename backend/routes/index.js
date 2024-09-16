@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const zod = require("zod");
-const {User} = require('/home/cyybxrg/Desktop/webDev Comeback/practise/week8/paytm/backend/db/db')
+const {User, Account} = require('../db/db')
 const authMiddleware = require("../middlewares/user")
 const jwt = require("jsonwebtoken");
 const JWT_SECRET = require("../config");
@@ -36,6 +36,10 @@ router.post("/signup",async(req,res)=>{
                     msg: "user created successfully",
                     token: token
                 })
+
+                // giving user a random balance when they sign up for now as we dont have any banking api to do it as of now
+                await Account.create
+                
             }
             else{
                 res.status(411).json({
