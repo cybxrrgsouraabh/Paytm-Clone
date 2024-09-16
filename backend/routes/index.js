@@ -30,16 +30,20 @@ router.post("/signup",async(req,res)=>{
                     firstName: req.body.firstName,
                     lastName: req.body.lastName
                 })
+
+                // giving user a random balance when they sign up for now as we dont have any banking api to do it as of now
+                const accInfo = await Account.create({
+                    balance: Math.floor(Math.random()*[10000-1]+1),
+                    userId: dbUser._id
+                })
+                console.log(accInfo);
                 
                 const token = jwt.sign({userId: dbUser._id}, JWT_SECRET);
                 res.status(200).json({
                     msg: "user created successfully",
-                    token: token
+                    token: token,
+                    balance: accInfo.balance
                 })
-
-                // giving user a random balance when they sign up for now as we dont have any banking api to do it as of now
-                await Account.create
-                
             }
             else{
                 res.status(411).json({
