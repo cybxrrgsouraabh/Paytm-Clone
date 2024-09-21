@@ -9,7 +9,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/vi/user", mainRouter);
-app.use("/api/v1/account", accountRouter);
+app.use("/api/vi/account", accountRouter);
 
 
 app.listen(3000);

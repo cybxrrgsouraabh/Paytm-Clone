@@ -36,13 +36,11 @@ router.post("/signup",async(req,res)=>{
                     balance: Math.floor(Math.random()*[10000-1]+1),
                     userId: dbUser._id
                 })
-                console.log(accInfo);
-                
+               
                 const token = jwt.sign({userId: dbUser._id}, JWT_SECRET);
                 res.status(200).json({
                     msg: "user created successfully",
-                    token: token,
-                    balance: accInfo.balance
+                    token: token
                 })
             }
             else{

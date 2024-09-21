@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { string } = require("zod");
+const { string, number } = require("zod");
 mongoose.connect("mongodb+srv://cyybxrg_p:cyybxrg7417@cluster0.fpt7cvq.mongodb.net/PayTM")
 
 const userSchema = new mongoose.Schema({
@@ -22,12 +22,14 @@ const userSchema = new mongoose.Schema({
         type: String,
         required:true,
         maxLength: 50,
+        lowercase: true,
         trim: true
     },
     lastName: {
         type: String,
         required: true,
         maxLength: 50,
+        lowercase: true,
         trim: true
     }
         
@@ -38,7 +40,7 @@ const userSchema = new mongoose.Schema({
 const accountSchema = new mongoose.Schema({
 
     balance: {
-        type: String,
+        type: Number,
         required: true
     },
     userId: {
