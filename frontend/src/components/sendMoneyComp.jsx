@@ -21,7 +21,7 @@ export const SendMoneyComp = ({userName})=>{
                 </div>
 
                 <div className="">
-                    <InputBox placeholder={"Enter Amount"} label={"Amount (in Rs)"}/>
+                    <InputBox placeholder={"Enter Amount"} label={"Amount (in Rs)"} type={"number"}/>
                 </div>
 
                 <div className="w-[100%] flex justify-center mt-3">
