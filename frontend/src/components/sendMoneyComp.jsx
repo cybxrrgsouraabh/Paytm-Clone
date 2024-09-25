@@ -4,6 +4,8 @@ import { ButtonComponent } from "./button"
 import { useLocation } from "react-router-dom"
 
 export const SendMoneyComp = ({userName})=>{
+    
+
     const location = useLocation();
     const data = location.state;
     return(
@@ -15,13 +17,14 @@ export const SendMoneyComp = ({userName})=>{
 
                 <div className="flex items-center">
                     <div className="rounded-full p-2 w-10 h-10 mr-2 text-center bg-green-400">
-                        {data.map(e=>{return e.firstName[0]})}
+                        S
                     </div>
-                    <div className="font-semibold text-xl">{data.map(e=>{return e.firstName})} {data.map(e=>{return e.lastName})}</div>
+                    {console.log(data)}
+                    <div className="font-semibold text-xl">Friend's Name</div>
                 </div>
 
                 <div className="">
-                    <InputBox placeholder={"Enter Amount"} label={"Amount (in Rs)"} type={"number"}/>
+                    <InputBox placeholder={"Enter Amount"} label={"Amount (in Rs)"} type={"number"} />
                 </div>
 
                 <div className="w-[100%] flex justify-center mt-3">
