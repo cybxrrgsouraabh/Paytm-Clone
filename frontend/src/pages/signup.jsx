@@ -5,14 +5,14 @@ import { SubHeading } from "../components/subHeading"
 import { InputBox } from "../components/inputbox"
 import { BottomWarning } from "../components/bottomWarning"
 import axios from "axios"
-
+import { useNavigate } from "react-router-dom"
 export const SignUp = ()=>{
     const [firstName, setFirstName] = useState();
     const [lastName, setlastName] = useState();
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
 
-    
+    const navigate = useNavigate();
 
     
 
@@ -50,7 +50,9 @@ export const SignUp = ()=>{
                             firstName,
                             lastName
                         })
+                        
                         localStorage.setItem("token", response.data.token)
+                        
                     }}
                 ></ButtonComponent>
                 <BottomWarning label={"Login"}></BottomWarning>

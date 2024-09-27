@@ -24,7 +24,7 @@ export const UserComponent = ({label,placeholder, Name})=>{
 
             <div className="flex flex-col justify-between">
                {users.map(e=>{
-                return <User user={e} key={e.id} btnText={"Send Money"} userData={users}/>
+                return <User user={e} key={e._id} btnText={"Send Money"}/>
                })}
             </div>
             
@@ -34,11 +34,9 @@ export const UserComponent = ({label,placeholder, Name})=>{
 
 function User({user, btnText, userData}){
     const navigate = useNavigate();
-    const data = userData
-
     const clickHandler = ()=>{
-        
-        navigate("/sendmoney", {state: data});
+        console.log(user)
+        navigate("/sendmoney", {state: {userId: user._id, firstName: user.firstName, lastName: user.lastName}});
     }
     return(
         <div className="flex justify-between">
